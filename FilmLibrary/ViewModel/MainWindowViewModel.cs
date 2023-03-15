@@ -7,8 +7,10 @@ using FilmLibrary.ViewModel.Base;
 
 namespace FilmLibrary.ViewModel
 {
-    internal class MainVindowViewModel : ViewModelBase
+    internal class MainWindowViewModel : ViewModelBase
     {
+        private ObservableCollection<Film> films;
+        private Film f;
         #region Title
         private string _title = "HomeWork17";
         public string Title
@@ -20,6 +22,21 @@ namespace FilmLibrary.ViewModel
             }
         }
         #endregion
+
+        #region Fields
+
+        private string _filmName;
+
+        public string FilmName
+        {
+            get => _filmName;
+            set => Set(ref _filmName, value);
+            
+
+        }
+
+        #endregion
+
 
         #region Commands
 
@@ -39,14 +56,14 @@ namespace FilmLibrary.ViewModel
         
         
         #endregion
-        public MainVindowViewModel()
+        public MainWindowViewModel()
         {
             #region Commands
-
             CloseApplicationCommand =
                 new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
-
             #endregion
+
+            films = new ObservableCollection<Film>();
         }
     }
 }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FilmLibrary"
         xmlns:vm ="clr-namespace:FilmLibrary.ViewModel"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="450" Width="800">
     <Grid>
@@ -16,16 +17,16 @@
             <RowDefinition Height="80*"/>
             <RowDefinition Height="20*"/>
         </Grid.RowDefinitions>
-        <DockPanel>
+        <DockPanel Grid.ColumnSpan="1" Grid.Row="0">
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Файлы">
+                    <MenuItem Header="Файлы">
                     <MenuItem Header="Выход" Command ="{Binding CloseApplicationCommand}"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
         <DataGrid Grid.Column="0"
-                  ItemsSource="{Binding}"
-                  AutoGenerateColumns="True">
+                  AutoGenerateColumns="True"
+                  Margin="0,18,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Path=FilmName}"/>
             </DataGrid.Columns>
