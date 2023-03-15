@@ -8,10 +8,13 @@ namespace FilmLibrary.Model
 {
     internal class Film
     {
+        public Film(string FilmName)
+        { 
+            this.FilmName = FilmName;
+        }
         public string FilmName
         {
-            get;
-            set;
+            get; set;
         }
         public string Country
         {
