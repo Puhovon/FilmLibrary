@@ -6,12 +6,19 @@ namespace FilmLibrary.ViewModel
 {
     internal class MainVindowViewModel : ViewModelBase
     {
-        public ObservableCollection<Film> filmsCollection;
+        private string _title = "HomeWork17";
+        public string Title
+        {
+            get=>_title;
+            set
+            {
+                Title = value;
+            }
+        }
+
         public MainVindowViewModel()
         {
-            filmsCollection = new ObservableCollection<Film>();
-            var f1 = new Film("Russia");
-            filmsCollection.Add(f1);
+
         }
     }
 }
