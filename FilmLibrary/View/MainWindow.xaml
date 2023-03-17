@@ -1,0 +1,49 @@
+﻿<Window x:Class="FilmLibrary.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FilmLibrary"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.ColumnSpan="1" Grid.Row="0">
+            <Menu DockPanel.Dock="Top">
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <fa:ImageAwesome Icon="Regular_File" Height="15"/>
+                        </MenuItem.Header>
+                        <MenuItem Header="Выход" Command ="{Binding CloseApplicationCommand}"/>
+                    </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DataGrid x:Name="Data"
+                  Grid.Row="0"  Grid.Column="0"
+                  ItemsSource="{Binding Films}"
+                  SelectedItem="{Binding SelectedFilm}"
+                  AutoGenerateColumns="False"
+                  Margin="0,18,0,0"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding FilmName}"/>
+                <DataGridTextColumn Header="County" Binding="{Binding Country}"/>
+                <DataGridTextColumn Header="Genre" Binding="{Binding Genre}"/>
+                <DataGridTextColumn Header="Director" Binding="{Binding Director}"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Изменить" Command="{Binding OpenEditWindow}"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+    </Grid>
+</Window>
