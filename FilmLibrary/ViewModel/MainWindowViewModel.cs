@@ -1,13 +1,13 @@
-﻿using System;
+﻿using FilmLibrary.Infrastructure.Commands;
 using FilmLibrary.Model;
+using FilmLibrary.View;
+using FilmLibrary.ViewModel.Base;
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using FilmLibrary.Infrastructure.Commands;
-using FilmLibrary.View;
-using FilmLibrary.ViewModel.Base;
 
 namespace FilmLibrary.ViewModel
 {
