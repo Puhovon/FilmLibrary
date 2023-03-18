@@ -1,11 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace FilmLibrary.Model
+namespace Test
 {
     internal class Context : DbContext
     {
-        public DbSet<Film> Films { get; set; }
-
         public Context()
         {
             Database.EnsureCreated();
@@ -15,5 +13,12 @@ namespace FilmLibrary.Model
         {
             optionsBuilder.UseNpgsql(@"host=localhost;port=5432;database=demo;username=postgres;password=123");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Film>();
+        }
+
+        public DbSet<Film> Films { get; set; }
     }
 }
