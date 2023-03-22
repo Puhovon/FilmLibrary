@@ -25,7 +25,7 @@ namespace FilmLibrary.View
         public static readonly DependencyProperty FilmNameProperty = DependencyProperty.Register(
             nameof(FilmName),
             typeof(string),
-            typeof(EditFilmWindow),
+            typeof(AddNewFilmWindow),
             new PropertyMetadata(default(string)));
         [Description("Название фильма")]
         public string FilmName
@@ -38,7 +38,7 @@ namespace FilmLibrary.View
         public static readonly DependencyProperty CountryProperty = DependencyProperty.Register(
             nameof(Country),
             typeof(string),
-            typeof(EditFilmWindow),
+            typeof(AddNewFilmWindow),
             new PropertyMetadata(default(string)));
         [Description("Название фильма")]
         public string Country
@@ -51,7 +51,7 @@ namespace FilmLibrary.View
         public static readonly DependencyProperty GenreProperty = DependencyProperty.Register(
             nameof(Genre),
             typeof(string),
-            typeof(EditFilmWindow),
+            typeof(AddNewFilmWindow),
             new PropertyMetadata(default(string)));
         [Description("Название фильма")]
         public string Genre
@@ -63,7 +63,7 @@ namespace FilmLibrary.View
         public static readonly DependencyProperty DirectorProperty = DependencyProperty.Register(
             nameof(Director),
             typeof(string),
-            typeof(EditFilmWindow),
+            typeof(AddNewFilmWindow),
             new PropertyMetadata(default(string)));
         [Description("Название фильма")]
         public string Director
