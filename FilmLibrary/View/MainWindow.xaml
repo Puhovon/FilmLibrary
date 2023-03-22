@@ -23,6 +23,7 @@
                             <fa:ImageAwesome Icon="Regular_File" Height="15"/>
                         </MenuItem.Header>
                         <MenuItem Header="Выход" Command ="{Binding CloseApplicationCommand}"/>
+                    <MenuItem Header="Об авторе" Command="{Binding OpenInfoDialogCommand}"/>
                     </MenuItem>
             </Menu>
         </DockPanel>
@@ -41,9 +42,14 @@
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Изменить" Command="{Binding OpenEditWindow}"></MenuItem>
+                    <MenuItem Header="Изменить" Command="{Binding OpenEditWindow}"/>
+                    <MenuItem Header="Добавить" Command="{Binding OpenAddFilmWindowCommand}"/>
+                    <MenuItem Header="Удалить" Command="{Binding DeleteFilmCommand}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
+        <StackPanel Grid.Row="0" Grid.Column="1" Margin=" 20">
+            <TextBlock Text="{Binding FilmsCount}"/>
+        </StackPanel>
     </Grid>
 </Window>

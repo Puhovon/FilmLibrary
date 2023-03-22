@@ -1,13 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace FilmLibrary.View
 {
     /// <summary>
-    /// Логика взаимодействия для EditFilm.xaml
+    /// Логика взаимодействия для AddNewFilmWindow.xaml
     /// </summary>
-    public partial class EditFilmWindow : Window
+    public partial class AddNewFilmWindow : Window
     {
         #region Fields
         /*------------------------------------------------------------------------------------------------------------------------------*/
@@ -61,8 +72,8 @@ namespace FilmLibrary.View
             set => SetValue(DirectorProperty, value);
         }
         /*------------------------------------------------------------------------------------------------------------------------------*/
-        #endregion
-        public EditFilmWindow()
+        #endregion 
+        public AddNewFilmWindow()
         {
             InitializeComponent();
         }
@@ -75,7 +86,7 @@ namespace FilmLibrary.View
                 String.IsNullOrEmpty(Genre)
                )
             {
-                MessageBox.Show("Все поля должны быть заполнены","Ошибка",MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Все поля должны быть заполнены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
                 ;
             }
