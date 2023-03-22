@@ -42,6 +42,7 @@
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
+
                     <MenuItem Header="Изменить" Command="{Binding OpenEditWindow}"/>
                     <MenuItem Header="Добавить" Command="{Binding OpenAddFilmWindowCommand}"/>
                     <MenuItem Header="Удалить" Command="{Binding DeleteFilmCommand}"/>
