@@ -1,7 +1,12 @@
 ﻿namespace FilmLibrary.Model
 {
-    internal class Film
+    internal class Film 
     {
+        public int Id
+        {
+            get;
+            set;
+        }
         public string FilmName
         {
             get; set;
