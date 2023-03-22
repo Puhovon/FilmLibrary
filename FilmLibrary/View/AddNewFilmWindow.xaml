@@ -1,13 +1,13 @@
-﻿<Window x:Class="FilmLibrary.View.EditFilmWindow"
+﻿<Window x:Class="FilmLibrary.View.AddNewFilmWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FilmLibrary"
+        xmlns:local="clr-namespace:FilmLibrary.View"
         xmlns:commands="clr-namespace:FilmLibrary.Infrastructure.Commands"
         mc:Ignorable="d"
-        Title="Редактирование" Height="260" Width="600"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Добавление" Height="260" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
@@ -34,13 +34,13 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Margin="0 0 20 0">
-            
+
             <Button Content="Ok"
                     Width="50"
                     Height="20"
                     Margin="3"
                     Click="ButtonBase_OnClick_"/>
-            
+
             <Button Height="20"
                     Width="50"
                     Content="Cancel"

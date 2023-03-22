@@ -4,7 +4,6 @@ using FilmLibrary.View;
 using FilmLibrary.ViewModel.Base;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -27,7 +26,14 @@ namespace FilmLibrary.ViewModel
             set => Set(ref _selectedFilm, value);
         }
         
-        #region Title
+        #region Title & Films Count
+
+        private string _filmsCount;
+        public string FilmsCount
+        {
+            get => _filmsCount;
+            set => Set(ref _filmsCount, $"{Films.Count}");
+        }
         private string _title = "HomeWork17";
         public string Title
         {
@@ -78,7 +84,74 @@ namespace FilmLibrary.ViewModel
 
         #region Commands
 
-        #region ViewDataFromGridCommand
+        #region DeleteFilmCommand
+
+        
+
+        public ICommand DeleteFilmCommand { get; }
+
+        private void OnDeleteFilmCommand(object p)
+        {
+            Films.Remove(SelectedFilm);
+        }
+
+        private bool CanDeleteFilmCommand(object p)
+        {
+            if (SelectedFilm == null)
+                return false;
+            return true;
+        }
+
+        #endregion
+
+        #region OpenInfoDialog
+
+        private string _infoAboutMe =
+            "Я начинающий разработчик на C#, это один из первых моих полноценных проектов с использованием паттерна MVVM\n"
+            + "Telegram: @Puhovon\n"
+            + "vk: arkadon14";
+
+        public ICommand OpenInfoDialogCommand { get; }
+
+        private void OnOpenInfoDialogCommand(object p)
+        {
+
+            MessageBox.Show(_infoAboutMe, "About me", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private bool CanOpenInfoDialogCommand(object p) => true;
+
+        #endregion
+
+        #region OpenAddFilmWindowCommand
+
+        public ICommand OpenAddFilmWindowCommand { get; }
+
+        private void OnOpenAddFilmWindowCommand(object p)
+        {
+            if (Convert.ToInt32(p) != 0 && SelectedFilm == null) return;
+
+            AddNewFilmWindow anfw = new AddNewFilmWindow();
+            Film film;
+
+            if (anfw.ShowDialog() == true)
+            {
+                film = new Film();
+                film.FilmName = anfw.FilmName;
+                film.Director = anfw.Director;
+                film.Country = anfw.Country;
+                film.Genre = anfw.Genre;
+                MessageBox.Show("Успешное добавление", "Добавление", MessageBoxButton.OK, MessageBoxImage.Information);
+                Films.Add(film);
+                _filmsCount = $"{Films.Count}";
+            }
+        }
+
+        private bool CanOpenAddFilmWindowCommand(object p) => true;
+
+        #endregion
+
+        #region OpenEditWindowCommand
 
         public ICommand OpenEditWindow { get; }
 
@@ -87,26 +160,17 @@ namespace FilmLibrary.ViewModel
             if (Convert.ToInt32(p) != 0 && SelectedFilm == null) return;
 
             EditFilmWindow eFW = new EditFilmWindow();
-            if (Convert.ToInt32(p) == 0)
+
+            eFW.Country = SelectedFilm.Country;
+            eFW.FilmName = SelectedFilm.FilmName;
+            eFW.Director = SelectedFilm.Director;
+            eFW.Genre = SelectedFilm.Genre;
+
+            if (eFW.ShowDialog() == true)
             {
-                Debug.Write("Command accept");
-                
-                if (eFW.ShowDialog() == true)
-                {
-                    Film film = new Film();
-                    film.Country = eFW.Country;
-                    film.FilmName = eFW.FilmName;
-                    film.Director = eFW.Director;
-                    film.Genre = eFW.Genre;
-                }
+
             }
-            else
-            { 
-                eFW.Country = SelectedFilm.Country;
-                eFW.FilmName = SelectedFilm.FilmName;
-                eFW.Director = SelectedFilm.Director;
-                eFW.Genre = SelectedFilm.Genre;
-            }
+
         }
 
         private bool CanOpenEditWindowCommandExecute(object p)
@@ -141,7 +205,12 @@ namespace FilmLibrary.ViewModel
 
             OpenEditWindow =
                 new LambdaCommand(OnOpenEditWindowCommandExecuted, CanOpenEditWindowCommandExecute);
-
+            OpenAddFilmWindowCommand = 
+                new LambdaCommand(OnOpenAddFilmWindowCommand, CanOpenAddFilmWindowCommand);
+            OpenInfoDialogCommand 
+                = new LambdaCommand(OnOpenInfoDialogCommand, CanOpenInfoDialogCommand);
+            DeleteFilmCommand
+                = new LambdaCommand(OnDeleteFilmCommand, CanDeleteFilmCommand);
             #endregion
 
             var films = Enumerable.Range(1, 25).Select(i => new Film
@@ -152,8 +221,9 @@ namespace FilmLibrary.ViewModel
                 Genre = "Action"
             });
             Films = new ObservableCollection<Film>(films);
-            
 
+
+               _filmsCount = $"Фильмов: {Films.Count}";
         }
     }
 }
