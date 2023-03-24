@@ -12,7 +12,7 @@ using FilmLibrary.Data;
 
 namespace FilmLibrary.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    internal class MainWindowViewModel : ViewModelBase
     {
         private NpgSqlData _context;
         private ObservableCollection<Film> _filmCollection;
@@ -206,11 +206,11 @@ namespace FilmLibrary.ViewModel
         
         
         #endregion
-        public MainWindowViewModel(NpgSqlData context)
+        public MainWindowViewModel()
         {
-            _context = context;
+            _context = new NpgSqlData();
             #region Commands
-            
+
             CloseApplicationCommand =
                 new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 

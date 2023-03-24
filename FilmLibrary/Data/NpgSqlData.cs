@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FilmLibrary.Data
 {
-    public class NpgSqlData
+    internal class NpgSqlData
     {
-        public NpgSqlData(Context context)
+        public NpgSqlData()
         {
-            _context = context;
+            _context = new Context();
         }
 
 
