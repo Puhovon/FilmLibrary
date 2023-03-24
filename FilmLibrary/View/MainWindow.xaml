@@ -29,7 +29,7 @@
         </DockPanel>
         <DataGrid x:Name="Data"
                   Grid.Row="0"  Grid.Column="0"
-                  ItemsSource="{Binding Films}"
+                  ItemsSource="{Binding Films, Mode=OneWay}"
                   SelectedItem="{Binding SelectedFilm}"
                   AutoGenerateColumns="False"
                   Margin="0,18,0,0"

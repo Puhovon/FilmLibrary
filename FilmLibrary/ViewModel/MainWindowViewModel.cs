@@ -3,29 +3,34 @@ using FilmLibrary.Model;
 using FilmLibrary.View;
 using FilmLibrary.ViewModel.Base;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using FilmLibrary.Data;
 
 namespace FilmLibrary.ViewModel
 {
     internal class MainWindowViewModel : ViewModelBase
     {
+        private NpgSqlData _context;
+        private ObservableCollection<Film> _filmCollection;
+        public ObservableCollection<Film> Films { get =>_filmCollection; set=>Set(ref _filmCollection,value); }
 
-        
 
-        public ObservableCollection<Film> Films { get; }
-        
+        #region Selected Film
         
         private Film _selectedFilm;
 
         public Film SelectedFilm
         {
-            get =>  _selectedFilm;
+            get => _selectedFilm;
             set => Set(ref _selectedFilm, value);
-        }
+        } 
         
+        #endregion
+
         #region Title & Films Count
 
         private string _filmsCount;
@@ -47,7 +52,7 @@ namespace FilmLibrary.ViewModel
 
 
 
-        #region Fields
+        #region Fields Film
 
         private string _filmName;
         private string _director;
@@ -92,7 +97,10 @@ namespace FilmLibrary.ViewModel
 
         private void OnDeleteFilmCommand(object p)
         {
+            _context.Delete(SelectedFilm.Id);
             Films.Remove(SelectedFilm);
+            ClearList();
+            FillList();
         }
 
         private bool CanDeleteFilmCommand(object p)
@@ -141,10 +149,11 @@ namespace FilmLibrary.ViewModel
                 film.Director = anfw.Director;
                 film.Country = anfw.Country;
                 film.Genre = anfw.Genre;
+                _context.Add(film);
                 MessageBox.Show("Успешное добавление", "Добавление", MessageBoxButton.OK, MessageBoxImage.Information);
-                Films.Add(film);
-                _filmsCount = $"{Films.Count}";
             }
+            ClearList();
+            FillList();
         }
 
         private bool CanOpenAddFilmWindowCommand(object p) => true;
@@ -170,7 +179,8 @@ namespace FilmLibrary.ViewModel
             {
 
             }
-
+            ClearList();
+            FillList();
         }
 
         private bool CanOpenEditWindowCommandExecute(object p)
@@ -198,8 +208,9 @@ namespace FilmLibrary.ViewModel
         #endregion
         public MainWindowViewModel()
         {
+            _context = new NpgSqlData();
             #region Commands
-            
+
             CloseApplicationCommand =
                 new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 
@@ -212,18 +223,16 @@ namespace FilmLibrary.ViewModel
             DeleteFilmCommand
                 = new LambdaCommand(OnDeleteFilmCommand, CanDeleteFilmCommand);
             #endregion
-
-            var films = Enumerable.Range(1, 25).Select(i => new Film
-            {
-                FilmName = $"Norvind {i}",
-                Country = "Russia",
-                Director = $"Arkadiy {i}",
-                Genre = "Action"
-            });
-            Films = new ObservableCollection<Film>(films);
-
-
-               _filmsCount = $"Фильмов: {Films.Count}";
+            FillList();
         }
+
+        private void FillList()
+        {
+            var films = _context.GetAllData.ToList();
+
+            Films = new ObservableCollection<Film>(films);
+        }
+
+        public void ClearList() => Films.Clear();
     }
 }
