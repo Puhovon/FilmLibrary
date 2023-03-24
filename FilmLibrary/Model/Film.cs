@@ -1,11 +1,14 @@
-﻿namespace FilmLibrary.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FilmLibrary.Model
 {
-    internal class Film 
+    public class Film 
     {
+        [Required]
+        [Key]
         public int Id
         {
-            get;
-            set;
+            get; set;
         }
         public string FilmName
         {
@@ -15,7 +18,7 @@
         {
             get; set;
         }
-        public string Director
+        public string? Director
         {
             get; set;
         }

@@ -11,7 +11,6 @@ namespace FilmLibrary.View
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
         }
     }
 }
