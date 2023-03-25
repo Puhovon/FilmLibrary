@@ -19,6 +19,11 @@ namespace FilmLibrary.Data
         
         public IEnumerable<Film> GetAllData => _context.Films.AsNoTracking();
 
+        public string GetConnectionString()
+        {
+            return _context.Database.GetDbConnection().ConnectionString;
+        }
+
         public void Add(Film film)
         {
             int id = GetAllData.Count() + 1;

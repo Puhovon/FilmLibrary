@@ -207,8 +207,22 @@ namespace FilmLibrary.ViewModel
         private bool CanCloseApplicationCommandExecute(object p) => true;
 
         #endregion
-        
-        
+
+        #region Open Data Base Status Window
+
+        public ICommand OpenDataBaseStatusWindow { get; }
+
+        private void OnOpenDataBaseStatusWindow(object p)
+        {
+            DBStatus dbStatus = new DBStatus();
+            dbStatus.Show();
+        }
+
+        private bool CanOpenDataBaseStatusWindow(object p) => true;
+
+        #endregion
+
+
         #endregion
         public MainWindowViewModel()
         {
@@ -226,6 +240,8 @@ namespace FilmLibrary.ViewModel
                 = new LambdaCommand(OnOpenInfoDialogCommand, CanOpenInfoDialogCommand);
             DeleteFilmCommand
                 = new LambdaCommand(OnDeleteFilmCommand, CanDeleteFilmCommand);
+            OpenDataBaseStatusWindow = new LambdaCommand(OnOpenDataBaseStatusWindow, CanOpenDataBaseStatusWindow);
+
             #endregion
 
             Films = new ObservableCollection<Film>();
