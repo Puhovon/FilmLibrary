@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,18 @@ namespace FilmLibrary.View
     {
         public DBStatus()
         {
-            InitializeComponent();
+        public static readonly DependencyProperty FilmNameProperty = DependencyProperty.Register(
+            nameof(DBStatusText),
+            typeof(string),
+            typeof(DBStatus),
+            new PropertyMetadata(default(string)));
+        [Description("Название фильма")]
+        public string DBStatusText
+        {
+            get => (string)GetValue(FilmNameProperty);
+            set => SetValue(FilmNameProperty, value);
+        }
+        InitializeComponent();
         }
     }
 }
