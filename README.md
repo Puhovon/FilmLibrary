@@ -24,4 +24,5 @@
 ![image](https://user-images.githubusercontent.com/91030077/227734982-f9fe090d-8cfe-4c14-8c87-1c44b5dc55c1.png)
 
 4. Открываем нужный нам файл(CreateTableScript) 
+5. Нажимаем F5 или кнопку запуска скрипта
 
