@@ -177,7 +177,11 @@ namespace FilmLibrary.ViewModel
 
             if (eFW.ShowDialog() == true)
             {
-
+                SelectedFilm.FilmName = eFW.FilmName;
+                SelectedFilm.Country = eFW.Country;
+                SelectedFilm.Genre = eFW.Genre;
+                SelectedFilm.Director = eFW.Director;
+                _context.Update(SelectedFilm);
             }
             ClearList();
             FillList();
@@ -223,14 +227,18 @@ namespace FilmLibrary.ViewModel
             DeleteFilmCommand
                 = new LambdaCommand(OnDeleteFilmCommand, CanDeleteFilmCommand);
             #endregion
+
+            Films = new ObservableCollection<Film>();
             FillList();
         }
 
         private void FillList()
         {
             var films = _context.GetAllData.ToList();
-
-            Films = new ObservableCollection<Film>(films);
+            foreach (var film in films)
+            {
+                Films.Add(film);
+            }
         }
 
         public void ClearList() => Films.Clear();
