@@ -24,6 +24,7 @@
                         </MenuItem.Header>
                         <MenuItem Header="Выход" Command ="{Binding CloseApplicationCommand}"/>
                     <MenuItem Header="Об авторе" Command="{Binding OpenInfoDialogCommand}"/>
+                    <MenuItem Header="Проверка строки подключения" Command="{Binding OpenDataBaseStatusWindow}"/>
                     </MenuItem>
             </Menu>
         </DockPanel>

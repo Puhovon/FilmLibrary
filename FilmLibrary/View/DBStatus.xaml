@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FilmLibrary.View"
         mc:Ignorable="d"
-        Title="DBStatus" Height="160" Width="600">
+        Title="Статус подключения к базе данных" Height="160" Width="600">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="80*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel 
+            HorizontalAlignment="Center" 
+                    Grid.ColumnSpan="2"
+            VerticalAlignment="Center">
+            <TextBlock Text="{Binding PgStatus}"/>
+            <TextBlock Text="{Binding PgConString}"/>
+        </StackPanel>
     </Grid>
 </Window>
